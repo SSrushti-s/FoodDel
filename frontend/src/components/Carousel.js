@@ -1,14 +1,24 @@
 import React from 'react'
+import { useState } from 'react'
 
-export default function Carousel() {
+export default function Carousel({search, setSearch }) {
+
     return (
         <div>
             <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel" style={{objectFit:"contain !important"}}>
                 <div className="carousel-inner" id='carousel'>
                     <div className="carousel-caption" style={{zIndex:"10"}}>
-                        <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success text-white bg-success" type="submit">Search</button>
+                        <form className="d-flex w-100">
+                            <input
+                                className="form-control me-2 w-100"
+                                type="search"
+                                placeholder="Search Food..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            <button className="btn btn-success">
+                                Search
+                            </button>
                         </form>
                     </div>
                     <div className="carousel-item active">

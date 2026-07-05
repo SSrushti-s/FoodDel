@@ -1,12 +1,25 @@
 import React from 'react'
 import { useCart, useDispatchCart } from '../components/ContextReducer';
+import { useNavigate } from 'react-router-dom';
+import '../App.css';
 
 export default function Cart() {
   let data = useCart();
   let dispatch = useDispatchCart();
+  const navigate = useNavigate();
 
   if (data.length === 0) {
-    return (<div><div className='m-5 w-100 text-center fs-3'>The Cart is Empty!</div></div>)
+    return (<div>
+      <div className="container mt-3">
+      <button
+        className="btn back-btn"
+        onClick={() => navigate('/')}
+      >
+        ← Back to Home
+      </button>
+      </div>
+      <div className='m-5 w-100 text-center fs-3'>The Cart is Empty!</div>
+      </div>)
   }
 
   const handleCheckOut = async () => {
@@ -27,6 +40,14 @@ export default function Cart() {
 
   return (
     <div className='container m-auto mt-5 table-responsive table-responsive-sm table-responsive-md'>
+      <div className="container mt-3">
+      <button
+        className="btn bg-success text-white back-btn"
+        onClick={() => navigate('/')}
+      >
+        ← Back to Home
+      </button>
+      </div>
       <table className='table table-hover'>
         <thead className='text-success fs-4'>
           <tr>

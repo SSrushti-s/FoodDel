@@ -25,3 +25,11 @@
     background: #1c1c1c;
     box-shadow: 0px 0px 10px 0px #000;
 }
+
+.back-btn{
+    background-color: rgb(40, 167, 69) !important;
+    color: white;
+}
+.back-btn:hover {
+    background-color: rgb(49, 57, 65) !important;
+}

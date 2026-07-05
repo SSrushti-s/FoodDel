@@ -1,8 +1,7 @@
 const mongoose=require("mongoose")//Node.js speaks JavaScript, and MongoDB speaks BSON/Documents.
 //  Mongoose sits in the middle so you can use simple JavaScript commands to manage your data.
 
-const mongoURI= "mongodb+srv://ssrushti1609_db_user:jFKylcMwHtRS9ABI@cluster0.dzsxq9v.mongodb.net/food?appName=Cluster0"
-
+const mongoURI= process.env.mongoURI; // Use the environment variable for the MongoDB URI
 const mongoDB= async() => {
     await mongoose.connect(mongoURI);
     console.log("Connected to MongoDB!!");
