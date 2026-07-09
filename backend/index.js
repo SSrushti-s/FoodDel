@@ -1,3 +1,6 @@
+const path = require('path');
+// This forces Node to look exactly in your current folder for the .env file
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 const express = require('express')// first we import express framework
 const app = express()// then we create an instance "app" which is an object of express
 const port = 5000 // we define the port number for the backend
