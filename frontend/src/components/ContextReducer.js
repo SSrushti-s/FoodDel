@@ -7,7 +7,18 @@ const CartDispatchContext = createContext();//This is the Control frequency. It 
 // The Reducer: The "Rules" for how the cart changes
 const reducer = (state, action) => {
     switch (action.type) {
-        case "ADD": //React requires this because you must never modify the original state directly.
+        case "ADD":
+            // Check if item with same ID and size already exists in the cart
+            const existingIdx = state.findIndex(item => item.id === action.id && item.size === action.size);
+            if (existingIdx > -1) {
+                let updatedArr = [...state];
+                updatedArr[existingIdx] = {
+                    ...updatedArr[existingIdx],
+                    qty: parseInt(updatedArr[existingIdx].qty) + parseInt(action.qty),
+                    price: updatedArr[existingIdx].price + action.price
+                };
+                return updatedArr;
+            }
             return [...state, { id: action.id, name: action.name, qty: action.qty, size: action.size, price: action.price, img: action.img }]
         case "REMOVE":
             let newArr = [...state]

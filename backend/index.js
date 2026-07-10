@@ -29,6 +29,7 @@ app.use(express.json())
 app.use('/api', require("./routes/CreateUser"));
 app.use('/api', require("./routes/DisplayData"));
 app.use('/api', require("./routes/OrderData"));
+app.use('/api/payment', require("./routes/Payment"));
 
 app.get('/', (req, res) => {
   res.send('Hello World! Kitchen is Open.')
