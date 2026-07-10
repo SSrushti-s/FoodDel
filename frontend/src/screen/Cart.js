@@ -41,11 +41,8 @@ export default function Cart() {
   const startCheckout = async () => {
     setCheckoutLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/payment/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: grandTotal })
-      });
+      const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+      let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
       const orderData = await response.json();
       
       if (orderData.success) {
@@ -92,19 +89,13 @@ export default function Cart() {
 
   const verifyAndCompleteOrder = async (rzpResponse, isSimulated) => {
     try {
-      const response = await fetch('http://localhost:5000/api/payment/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...rzpResponse,
-          simulated: isSimulated
-        })
-      });
+      const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+      let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
       const verifyData = await response.json();
 
       if (verifyData.success) {
         let userEmail = localStorage.getItem('userEmail');
-        const orderResponse = await fetch('http://localhost:5000/api/orderData', {
+        const orderResponse = await fetch(`${API_BASE}/api/orderData`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

@@ -12,13 +12,13 @@ mongoDB();
 
 // Step 2: Middleware (The Security Guards)
 // This allows your Frontend (usually port 3000) to talk to Backend (port 5000)
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:3000'];
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  next();
 });
 
 // Step 3: Parse JSON (The Translator)

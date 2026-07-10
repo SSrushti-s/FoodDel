@@ -13,13 +13,11 @@ export default function Home() {
 
     const loadData = async () => { //we use async because network requests take time, it is designed to reach out over the internet to your backend API
         try{
-            let response = await fetch("http://localhost:5000/api/foodData", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' }
-        });
-        response = await response.json(); //The raw response from the server is just text; this line parses that text into a JavaScript Array so React can actually read and manipulate the food objects.
-        setFoodItem(response[0]); // Array of food items
-        setFoodCat(response[1] || []);  // Array of categories
+            const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+            let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+            response = await response.json(); //The raw response from the server is just text; this line parses that text into a JavaScript Array so React can actually read and manipulate the food objects.
+            setFoodItem(response[0]); // Array of food items
+            setFoodCat(response[1] || []);  // Array of categories
         }
         catch(error){
             console.error('Error fetching food data:', error);
