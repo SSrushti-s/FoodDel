@@ -42,7 +42,13 @@ export default function Cart() {
   const startCheckout = async () => {
     setCheckoutLoading(true);
     try {
-      let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+      let response = await fetch(`${API_BASE}/api/orderData`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, 
+        // 2. Pass your cart items and user metadata so the backend can generate a valid transaction
+        body: JSON.stringify({
+          order_data: data,
+          email: localStorage.getItem('userEmail'),
+          order_date: new Date().toDateString()
+        }) });
       const orderData = await response.json();
       
       if (orderData.success) {
