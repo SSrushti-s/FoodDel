@@ -90,9 +90,9 @@ export default function Cart() {
   const verifyAndCompleteOrder = async (rzpResponse, isSimulated) => {
     try {
 
-      const verifyData = await rzpResponse.response.json();
+      const verifyData = await rzpResponse;
 
-      if (verifyData.success) {
+      if (verifyData && verifyData.razorpay_payment_id) {
         let userEmail = localStorage.getItem('userEmail');
         const orderResponse = await fetch(`${API_BASE}/api/orderData`, {
           method: 'POST',
