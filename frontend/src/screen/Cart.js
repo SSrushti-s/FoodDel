@@ -3,6 +3,7 @@ import { useCart, useDispatchCart } from '../components/ContextReducer';
 import { useNavigate } from 'react-router-dom';
 import RazorpayModal from '../components/RazorpayModal';
 import '../App.css';
+import { API_BASE } from '../apiConfig';
 
 export default function Cart() {
   let data = useCart();
@@ -41,7 +42,6 @@ export default function Cart() {
   const startCheckout = async () => {
     setCheckoutLoading(true);
     try {
-      const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
       let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
       const orderData = await response.json();
       
@@ -89,8 +89,7 @@ export default function Cart() {
 
   const verifyAndCompleteOrder = async (rzpResponse, isSimulated) => {
     try {
-      const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
-      let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+
       const verifyData = await response.json();
 
       if (verifyData.success) {

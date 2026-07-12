@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
+import { API_BASE } from '../apiConfig';
 
 export default function Login() {
   const [credentials, setcredentials] = useState({ email: '', password: '' });
@@ -14,7 +15,6 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
       const response = await fetch(`${API_BASE}/api/loginuser`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

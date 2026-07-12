@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../apiConfig';
 
 export default function MyOrders() {
   const [orderData, setOrderData] = useState([]);
@@ -17,7 +18,6 @@ export default function MyOrders() {
       }
 
       try {
-        const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
         const response = await fetch(`${API_BASE}/api/myOrderData`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

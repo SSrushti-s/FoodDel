@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Card from '../components/Cards'
 import Carousel from '../components/Carousel'
+import { API_BASE } from '../apiConfig'
 
 export default function Home() {
     const [foodCat, setFoodCat] = useState([]); // defining a state variable for food category
@@ -13,7 +14,6 @@ export default function Home() {
 
     const loadData = async () => { //we use async because network requests take time, it is designed to reach out over the internet to your backend API
         try{
-            const API_BASE = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
             let response = await fetch(`${API_BASE}/api/foodData`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
             response = await response.json(); //The raw response from the server is just text; this line parses that text into a JavaScript Array so React can actually read and manipulate the food objects.
             setFoodItem(response[0]); // Array of food items
