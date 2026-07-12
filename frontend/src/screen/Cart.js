@@ -90,7 +90,7 @@ export default function Cart() {
   const verifyAndCompleteOrder = async (rzpResponse, isSimulated) => {
     try {
 
-      const verifyData = await response.json();
+      const verifyData = await rzpResponse.response.json();
 
       if (verifyData.success) {
         let userEmail = localStorage.getItem('userEmail');
